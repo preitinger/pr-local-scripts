@@ -4,7 +4,7 @@ submodule="$1"
 
 if [ "${submodule}" = "" ]
 then
-    echo "usage: $0 <repository to add as submodule in app/submodules>"
+    echo "usage: $0 <repository to add as submodule in app/_lib/submodules>"
     exit 1
 fi
 
