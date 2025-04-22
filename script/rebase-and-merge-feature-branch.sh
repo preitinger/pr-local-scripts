@@ -9,7 +9,7 @@ then
 fi
 
 git switch local &&
-cd $(dirname $0)/../../pr-example-next-private-submodules_MAIN &&
+cd $(dirname $0)/../../../pr-example-next-private-submodules_MAIN &&
 git rebase --onto common local "${feature_branch}" &&
 git switch common &&
 git merge --ff-only "${feature_branch}" &&
