@@ -8,4 +8,12 @@ then
     exit 1
 fi
 
-#mkdir -p 
+cd "$(dirname "$0")/../.." &&
+workspace=${PWD} &&
+mkdir -p "${workspace}/app/_lib/submodules" &&
+cd "${workspace}/app/_lib/submodules" &&
+pwd &&
+git submodule add --force ${submodule} &&
+git commit -m "SUBMODULE ADD ${submodule}" &&
+
+echo 'The End.'
