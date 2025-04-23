@@ -16,18 +16,20 @@ fi
 
 project=$(basename $(realpath ${workspace})) &&
 echo "project ${project}" &&
-echo "Skip rest while testing" && false &&
 cd "${workspace}" &&
-ls app && echo 'workspace enthält Verzeichnis app; fahre fort...' || ( echo 'workspace enthält kein Verzeichnis app; bitte Argument 1 überprüfen.' && false ) &&
+( ls app && echo 'workspace enthält Verzeichnis app; fahre fort...' || ( echo 'workspace enthält kein Verzeichnis app; bitte Argument 1 überprüfen.' && false ) ) &&
 mkdir -p "app/_lib/submodules" &&
 cd "app/_lib/submodules" &&
 pwd &&
 git submodule add --force ${submodule} &&
+git submodule update --init --recursive &&
 git commit -m "SUBMODULE ADD ${submodule}" &&
 cd .. &&
 rsync -a --exclude='.*' "submodules" "../../../${project}_MAIN/app/_lib/" &&
 cd "../../../${project}_MAIN" &&
 git switch main && # zur Sicherheit
+git add app/_lib/submodules &&
+git commit -m 'Copied content of all common submodules from branch local.' &&
 
 
 echo 'The End.' ||
