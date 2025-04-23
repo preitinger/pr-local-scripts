@@ -15,10 +15,9 @@ echo "feature_branch ${feature_branch}" &&
 echo "project ${project}" &&
 cd "${workspace}" &&
 ls app && echo 'workspace enthält Verzeichnis app; fahre fort...' || ( echo 'workspace enthält kein Verzeichnis app; bitte Argument 1 überprüfen.' && false ) &&
-echo 'Breche for git switch local ab zu Testzwicken' && false &&
 
 git switch local &&
-cd /../${project}_MAIN &&
+cd ../${project}_MAIN &&
 git rebase --onto common local "${feature_branch}" &&
 git switch common &&
 git merge --ff-only "${feature_branch}" &&
