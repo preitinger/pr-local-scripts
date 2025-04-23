@@ -8,11 +8,14 @@
 workspace="$1"
 submodule="$2"
 
-if [ "${submodule}" = "" ]
+if [ "${workspace}" = "" -o "${submodule}" = "" ]
 then
     echo "usage: $0 <path to project root> <repository to add as submodule in app/_lib/submodules>"
     exit 1
 fi
+
+abs_script_path=$(realpath $(dirname "$0"))
+abs_workspace=$(realpath ${workspace})
 
 project=$(basename $(realpath ${workspace})) &&
 echo "project ${project}" &&
@@ -22,18 +25,9 @@ mkdir -p "app/_lib/submodules" &&
 cd "app/_lib/submodules" &&
 pwd &&
 git submodule add --force ${submodule} &&
-git submodule update --init --recursive &&
 git commit -m "SUBMODULE ADD ${submodule}" &&
-cd .. &&
-rsync -a --exclude='.*' "submodules" "../../../${project}_MAIN/app/_lib/" &&
-cd "../../../${project}_MAIN" &&
-git switch main && # zur Sicherheit
-git add app/_lib/submodules &&
-git commit -m 'Copied content of all common submodules from branch local.' &&
+"${abs_script_path}/submodules-to-main.sh" "${abs_workspace}" &&
 
 
-echo 'The End.' ||
-echo 'ERROR'
-
-# TODO Copy ${workspace}/app/_lib/submodules folder without .git files to ${workspace}/../${workspace}_MAIN/app/_lib/
-# Then, commit -m 'Copied content of submodules'
+echo 'common-submodule-add.sh - The End.' ||
+( echo 'common-submodule-add.sh - ERROR' && false )
