@@ -17,3 +17,6 @@ git submodule add --force ${submodule} &&
 git commit -m "SUBMODULE ADD ${submodule}" &&
 
 echo 'The End.'
+
+# TODO Copy ${workspace}/app/_lib/submodules folder without .git files to ${workspace}/../${workspace}_MAIN/app/_lib/
+# Then, commit -m 'Copied content of submodules'
