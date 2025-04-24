@@ -21,7 +21,7 @@ abs_workspace=$(realpath ${workspace})
 project=$(basename $(realpath ${workspace})) &&
 echo "project ${project}" &&
 cd "${workspace}" &&
-( ls app && echo 'workspace enthält Verzeichnis app; fahre fort...' || ( echo 'workspace enthält kein Verzeichnis app; bitte Argument 1 überprüfen.' && false ) ) &&
+( ls -d app >/dev/null && echo 'workspace enthält Verzeichnis app; fahre fort...' || ( echo 'workspace enthält kein Verzeichnis app; bitte Argument 1 überprüfen.' && false ) ) &&
 if [ -d "../${project}_MAIN" ]
 then
     echo "Parallel-Workspace ${project}_MAIN gefunden; fahre fort..."
