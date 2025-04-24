@@ -22,7 +22,10 @@ cd "../${project}_MAIN" &&
 git switch main && # zur Sicherheit
 git add app/_lib/submodules &&
 echo 'Before commit of branch "main".'
-git commit -m 'Copied content of all common submodules from branch local.' &&
+if ! git commit -m 'Copied content of all common submodules from branch local.'
+then
+    echo "Warnung: commit nicht durchgeführt - in Ordnung nur, wenn ${project}_MAIN sich wirklich nicht geändert hat."
+fi &&
 
 
 
