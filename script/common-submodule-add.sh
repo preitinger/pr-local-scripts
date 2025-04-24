@@ -7,10 +7,11 @@
 
 workspace="$1"
 submodule="$2"
+branch="$3"
 
 if [ "${workspace}" = "" -o "${submodule}" = "" ]
 then
-    echo "usage: $0 <path to project root> <repository to add as submodule in app/_lib/submodules>"
+    echo "usage: $0 <path to project root> <repository to add as submodule in app/_lib/submodules> [<branch>]"
     exit 1
 fi
 
@@ -24,7 +25,12 @@ cd "${workspace}" &&
 mkdir -p "app/_lib/submodules" &&
 cd "app/_lib/submodules" &&
 pwd &&
-git submodule add --force ${submodule} &&
+if [ "${branch}" = "" ]
+then
+    git submodule add --force "${submodule}"
+else
+    git submodule add -b "${branch}"  --force "${submodule}"
+fi &&
 git commit -m "SUBMODULE ADD ${submodule}" &&
 "${abs_script_path}/submodules-to-main.sh" "${abs_workspace}" &&
 
