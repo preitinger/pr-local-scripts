@@ -8,11 +8,18 @@ then
     exit 1
 fi
 
+
 project=$(basename $(realpath ${workspace})) &&
 echo "project ${project}" &&
 cd "${workspace}" &&
 ( ls app && echo 'workspace enthält Verzeichnis app; fahre fort...' || ( echo 'workspace enthält kein Verzeichnis app; bitte Argument 1 überprüfen.' && false ) ) &&
-
+if [ -d "../${project}_MAIN" ]
+then
+    echo "Parallel-Workspace ${project}_MAIN gefunden; fahre fort..."
+else
+    echo "Parallel-Workspace ${project}_MAIN nicht gefunden; breche ab." &&
+    false
+fi &&
 git submodule update --init --recursive &&
 echo 'Verzeichnis nach submodule update ...' &&
 pwd &&
