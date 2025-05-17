@@ -2,7 +2,7 @@
 
 # Wichtige Voraussetzungen für die Anwendung dieses Skripts:
 # branch local in project root (1. Argument)
-# Nichts gestaged, sonst wird das mi SUBMODULE ADD mit commitet.
+# Nichts gestaged, sonst wird das mit SUBMODULE ADD mit commitet.
 # Sauberer branch main in ${workspace}/../${project}_MAIN
 
 workspace="$1"
