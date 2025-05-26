@@ -17,6 +17,4 @@ fi
 
 cd ../serviceWorker-for-pr-push-newsletter3 &&
 npm run build && npm run "copy to ${project}" && cd "../${project}" && npm run build &&
-pr-local-scripts/script/list-to-cache.sh . &&
-npm run start
-
+pr-local-scripts/script/list-to-cache.sh .

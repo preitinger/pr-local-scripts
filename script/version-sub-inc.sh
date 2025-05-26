@@ -29,10 +29,12 @@ export const VERSION: TVersion = {
 };
 " >app/_lib/both/version.ts &&
 
-printf "export const VERSION = ${newSub}" > "../serviceWorker-for-pr-push-newsletter3/src/version.ts" &&
-
-# TODO update local/lastVersion.txt
+dir=${PWD} &&
+cd '../serviceWorker-for-pr-push-newsletter3' &&
+npm run configure "${project}" "${newSub}" &&
+cd ${dir} &&
 echo "${newMain} ${newSub}" >local/lastVersion.txt &&
 
-printf '\n         The End.\n\n'
+printf '\n         The End.\n\n' ||
+( echo "       $0      -   ERROR." && false )
 
