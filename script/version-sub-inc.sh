@@ -29,10 +29,6 @@ export const VERSION: TVersion = {
 };
 " >app/_lib/both/version.ts &&
 
-dir=${PWD} &&
-cd '../serviceWorker-for-pr-push-newsletter3' &&
-npm run configure "${project}" "${newSub}" &&
-cd ${dir} &&
 echo "${newMain} ${newSub}" >local/lastVersion.txt &&
 
 printf '\n         The End.\n\n' ||

@@ -15,6 +15,9 @@ then
     exit 1
 fi
 
+read main sub <local/lastVersion.txt &&
+dir=${PWD} &&
 cd ../serviceWorker-for-pr-push-newsletter3 &&
-npm run build && npm run "copy to ${project}" && cd "../${project}" && npm run build &&
+npm run configure "${project}" "${sub}" &&
+npm run build && npm run "copy to ${project}" && cd "${dir}" && npm run build &&
 pr-local-scripts/script/list-to-cache.sh .
