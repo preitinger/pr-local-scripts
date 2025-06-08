@@ -18,14 +18,14 @@ ls app && echo 'workspace enthält Verzeichnis app; fahre fort...' || ( echo 'wo
 
 git switch local &&
 cd ../${project}_MAIN &&
-git rebase --onto common local "${feature_branch}" &&
+git rebase -X theirs --onto common local "${feature_branch}" &&
 git switch common &&
 git merge --ff-only "${feature_branch}" &&
 git branch -d "${feature_branch}" &&
 git switch main &&
-git merge common -m 'merge common into main' &&
+git merge -X theirs common -m 'merge common into main' &&
 cd ../${project} &&
 git switch local &&
-git merge common -m 'merge common into local' &&
+git merge -X theirs common -m 'merge common into local' &&
 echo 'The End' ||
 echo 'ERROR!'
