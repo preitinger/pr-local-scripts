@@ -21,7 +21,7 @@ newMain=${main} &&
 newSub=$((sub + 1)) &&
 echo "Last version ${main}.${sub}, incrementing to ${newMain}.${newSub}" &&
 
-printf "import { TVersion } from '../submodules/pr-lib-sw-utils/sw-utils';
+printf "import type { TVersion } from '../submodules/pr-lib-sw-utils/sw-utils';
 
 export const VERSION: TVersion = {
     main: ${newMain},
