@@ -10,10 +10,10 @@ echo "project ${project}"
 git switch local &&
 git submodule update --init --recursive &&
 
-npm install &&
+pnpm install &&
 git worktree add "../${project}_MAIN" main &&
 cd "../${project}_MAIN" &&
-npm install &&
+pnpm install &&
 cd - &&
 
 
