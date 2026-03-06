@@ -18,6 +18,6 @@ fi
 read main sub <local/lastVersion.txt &&
 dir=${PWD} &&
 cd ../serviceWorker-for-pr-push-newsletter3 &&
-pnpm run configure "${project}" "${main}" "${sub}" &&
-pnpm run build && pnpm run "copy to" "${project}" && cd "${dir}" && pnpm run build &&
+npm run configure "${project}" "${main}" "${sub}" &&
+npm run build && pnpm run "copy to" "${project}" && cd "${dir}" && pnpm run build &&
 pr-local-scripts/script/list-to-cache.sh . "${project}" "${main}" "${sub}"
