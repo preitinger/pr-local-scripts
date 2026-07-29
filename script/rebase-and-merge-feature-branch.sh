@@ -16,8 +16,11 @@ echo "project ${project}" &&
 cd "${workspace}" &&
 ls app && echo 'workspace enthält Verzeichnis app; fahre fort...' || ( echo 'workspace enthält kein Verzeichnis app; bitte Argument 1 überprüfen.' && false ) &&
 
+set -x
+
 git switch local &&
 cd ../${project}_MAIN &&
+echo "${project}_MAIN: vor git rebase -X theirs --onto common local ${feature_branch}" &&
 git rebase -X theirs --onto common local "${feature_branch}" &&
 git switch common &&
 git merge --ff-only "${feature_branch}" &&
